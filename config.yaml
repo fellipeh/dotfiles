@@ -1,0 +1,12 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+dotfiles:
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+profiles:
+  glenlivet.local:
+    dotfiles:
+    - f_zshrc

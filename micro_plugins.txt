@@ -1,0 +1,10 @@
+The following plugins are currently installed:
+bookmark (2.2.0)
+filemanager (3.5.0)
+autoclose (1.0.0)
+comment (1.0.0)
+diff (1.0.0)
+ftoptions (1.0.0)
+linter (1.0.0)
+literate (1.0.0)
+status (1.0.0)
