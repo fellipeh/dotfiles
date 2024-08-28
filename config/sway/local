@@ -4,8 +4,8 @@
 # add your personal customizations here.
 #
 
-for_window [class="Telegram"] floating enable
-for_window [class="Telegram"] sticky enable
+for_window [class="org.telegram.desktop"] floating enable
+for_window [class="org.telegram.desktop"] sticky enable
 
 for_window [class="gnome-calculator"] floating enable
 for_window [class="Virt-manager"] floating enable
@@ -32,6 +32,13 @@ for_window [class="Atril"] floating enable
 for_window [title="Emulator"] floating enable
 for_window [title="Emulator"] border pixel 0
 
+# Changing keyboard to US-Int
+input "type:keyboard" {
+    xkb_layout us
+    xkb_variant intl
+    #xkb_options grp:alt_shift_toggle
+    xkb_numlock enabled
+}
 
 input "1267:12811:ELAN0683:00_04F3:320B_Touchpad" {
        dwt enabled

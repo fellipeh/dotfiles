@@ -38,10 +38,7 @@ exec xsetroot -solid "#393939"
 bar {
     position top
     status_command i3status --config ~/.config/sway/i3status.conf
-    tray_output DP-1
-    tray_output DP-2
-    tray_output HDMI-1
-    tray_output HDMI-2
+    tray_output HDMI-A-1
     tray_output eDP-1
     colors {
       background #555077
