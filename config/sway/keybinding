@@ -1,0 +1,114 @@
+# Change left win/alt keys so keyboard is more Apple-ish.
+exec --no-startup-id setxkbmap -option altwin:swap_lalt_lwin
+
+# Reorganize moniters when display key is pressed
+bindsym XF86Display exec --no-startup-id ~/Applications/display_autoorg.sh
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Set monitor brightnes
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && $refresh_i3status
+bindsym XF86MonBrightnessUp exec brightnessctl set +10% && $refresh_i3status
+
+# start a terminal
+bindsym $mod+Return exec $terminal
+
+# start dmenu (a program launcher)
+bindsym $mod+space exec --no-startup-id dmenu_run
+# A more modern dmenu replacement is rofi:
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# There also is i3-dmenu-desktop which only displays applications shipping a
+# .desktop file. It is a wrapper around dmenu, so you need that installed.
+# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# "minimize" windows (scratchpad)
+bindsym $mod+minus move scratchpad
+# "cycle" trough scratchpad
+bindsym $mod+Tab scratchpad show
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Log out menu: $mod+Backspace
+# shutdown / restart / suspend...
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3lockwall, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+BackSpace mode "$mode_system"
+
+# set $suspend_system Suspend? (Y)es (No)
+# mode "$suspend_system" {
+#    bindsym y exec -
+#    bindsym Y exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+#    # back to normal: Escape or n/N
+#    bindsym n mode "default"
+#    bindsym N mode "default"
+#    bindsym Escape mode "default"
+#}
+# bindsym $mod+Ctrl+Delete mode "$suspend_system"
+# Suspend system.
+bindsym $mod+Ctrl+Delete exec --no-startup-id $i3lockwall && systemctl suspend
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 2 px or 2 ppt
+    bindsym Down resize grow height 2 px or 2 ppt
+    bindsym Up resize shrink height 2 px or 2 ppt
+    bindsym Right resize grow width 2 px or 2 ppt
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Screenshot
+bindsym $mod+Print exec scrot '%Y-%m-%d-%H%M%S.png' -e 'mv $f ~/$${SCREENSHOT_DIR:-Pictures}' -d 2 -s
+bindsym $mod+Control+Print exec scrot "%Y-%m-%d-%H%M%S.png" -e 'mv $f ~/$${SCREENSHOT_DIR:-Pictures}' -d 2 -b -s -f
+bindsym $mod+Shift+Print exec scrot "%Y-%m-%d-%H%M%S.png" -e 'mv $f ~/$${SCREENSHOT_DIR:-Pictures}' -d 2 -m
+
+# Change workspace sequentially on current output
+bindsym $mod+Next workspace next_on_output
+bindsym $mod+Prior workspace prev_on_output
+

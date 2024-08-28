@@ -1,0 +1,31 @@
+[core]
+	excludesfile = /home/fellipeh/.gitignore_global
+	autocrlf = input
+	eol = lf
+	editor = nvim
+[user]
+	name = "Fellipe Henrique"
+	email = "2904206+fellipeh@users.noreply.github.com"
+[pull]
+	rebase = false
+	ff = only
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[alias]
+  co = checkout
+  ec = config --global -e
+  up = !~/Developer/git-up.sh
+  cob = checkout -b
+  cm = !git add -A && git commit -as
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  wip = !git add -u && git commit -m "WIP"
+  undo = reset HEAD~1 --mixed
+  amend = commit -a --amend
+

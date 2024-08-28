@@ -1,0 +1,45 @@
+#
+# Local customizations.
+# If you are using these file, you might want to
+# add your personal customizations here.
+#
+
+for_window [class="Telegram"] floating enable
+for_window [class="Telegram"] sticky enable
+
+for_window [class="gnome-calculator"] floating enable
+for_window [class="Virt-manager"] floating enable
+
+# YouTube popup video
+for_window [class="firefox" instance="Toolkit"] sticky enable
+
+# Bluetooth GUI applets
+for_window [class="Blueberry.py"] floating enable
+for_window [class="Blueman-manager"] floating enable
+
+# DisplayCAL
+for_window [class="Displaycal"] floating enable
+for_window [class="Displaycal"] border pixel 0
+
+# audio config
+for_window [class="Pavucontrol"] floating enable
+
+# Multimedia viewer
+for_window [class="feh"] floating enable
+for_window [class="Atril"] floating enable
+
+# Android Studio
+for_window [title="Emulator"] floating enable
+for_window [title="Emulator"] border pixel 0
+
+
+input "1267:12811:ELAN0683:00_04F3:320B_Touchpad" {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+       middle_emulation enabled
+}
+
+input "1133:45091:Logitech_Wireless_Mouse_MX_Master_3" {
+       natural_scroll enabled
+}
